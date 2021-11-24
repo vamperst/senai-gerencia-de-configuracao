@@ -1,23 +1,24 @@
 ## Cloudformation 1.5 - Drift Detection
 
-1. Rode o comando `cd ~/environment/exercise-features-cloudformation/03-Drifts/` para entrar na pasta do exercício.
-2. Execute o comando abaixo para colocar o template necessário para o exercicio no S3:
+1. Baixe o repositório do exercicio. Para tal, execute o comando `git clone https://github.com/vamperst/exercise-features-cloudformation.git` . Este é o repositório que utilizará no restante do módulo Cloudformaiton.
+2. Rode o comando `cd ~/environment/exercise-features-cloudformation/03-Drifts/` para entrar na pasta do exercício.
+3. Execute o comando abaixo para colocar o template necessário para o exercicio no S3:
    ``` shell
     aws s3 cp drift_detection_stack.yml s3://base-config-<SEU RM>/cfn/exercise-features-cloudformation/ 
    ```
-3. Crie uma stack com o nome `drift-lab-with-sqs` utilizando o arquivo `drift_detection_stack.yml` que acabou de subir para o S3.
-4. Após criado, note que na aba `Stack Info` a opção `Drift Status` está `NOT_CHECKED`
+4. Crie uma stack com o nome `drift-lab-with-sqs` utilizando o arquivo `drift_detection_stack.yml` que acabou de subir para o S3.
+5. Após criado, note que na aba `Stack Info` a opção `Drift Status` está `NOT_CHECKED`
    ![](img/drift-NOT_CHECKED.png)
-5. No canto superior direito clique em `Stack actions` e clique em `Detect drift`
+6. No canto superior direito clique em `Stack actions` e clique em `Detect drift`
    ![](img/click-detect-drift.png)
-6. Note que após alguns instantes o Drift Status muda para `IN_SYNC`
+7. Note que após alguns instantes o Drift Status muda para `IN_SYNC`
    ![](img/drfit-in-sync.png)
-7. Em uma nova aba do console AWS vá para o serviço SQS (Simple queue Service)
-8. Note que o cloudformation que subiu criou 2 filas `DriftLab-ErrorQueue` e `DriftLab-InputQueue`
+8. Em uma nova aba do console AWS vá para o serviço SQS (Simple queue Service)
+9. Note que o cloudformation que subiu criou 2 filas `DriftLab-ErrorQueue` e `DriftLab-InputQueue`
    ![](img/sqs-first-view.png)
-9. Selecione a `DriftLab-InputQueue` e clique em `Ações de fila` e clique em `configurar fila` 
+10. Selecione a `DriftLab-InputQueue` e clique em `Ações de fila` e clique em `configurar fila` 
     ![](img/DriftLab-InputQueue-action-1.png)
-10. Coloque os seguintes parametros:
+11. Coloque os seguintes parametros:
     1.  `Tempo limite de visibilidade` padrão = 50 segundos
     2.  `Atraso de entrega` = 120 segundos
     3.  Tire a seleção do checkbox `Usar a política de redirecionamento`
